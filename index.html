@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>X - Formerly Twitter</title>
+        <link rel="stylesheet" href="styles.css" />
+        <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore-compat.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <!-- Authentication Section -->
+            <div id="auth-section" class="container">
+                <h1>Welcome to X</h1>
+                <div id="auth-forms">
+                    <div id="login-form">
+                        <h2>Login</h2>
+                        <input
+                            type="email"
+                            id="login-email"
+                            placeholder="Email"
+                            required
+                        />
+                        <input
+                            type="password"
+                            id="login-password"
+                            placeholder="Password"
+                            required
+                        />
+                        <button id="login-button">Login</button>
+                        <p>
+                            <a href="#" id="forgot-password-link"
+                                >Forgot Password?</a
+                            >
+                        </p>
+                        <p>
+                            Don't have an account?
+                            <a href="#" id="show-signup">Sign Up</a>
+                        </p>
+                    </div>
+
+                    <div id="signup-form" style="display: none">
+                        <h2>Create Account</h2>
+                        <input
+                            type="text"
+                            id="signup-username"
+                            placeholder="Username"
+                            required
+                        />
+                        <input
+                            type="email"
+                            id="signup-email"
+                            placeholder="Email"
+                            required
+                        />
+                        <input
+                            type="password"
+                            id="signup-password"
+                            placeholder="Password"
+                            required
+                        />
+                        <button id="signup-button">Sign Up</button>
+                        <p>
+                            Already have an account?
+                            <a href="#" id="show-login">Login</a>
+                        </p>
+                    </div>
+
+                    <div id="forgot-password-form" style="display: none">
+                        <h2>Reset Password</h2>
+                        <input
+                            type="email"
+                            id="reset-email"
+                            placeholder="Email"
+                            required
+                        />
+                        <button id="reset-button">Send Reset Link</button>
+                        <p><a href="#" id="back-to-login">Back to Login</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main App Section (hidden until login) -->
+            <div id="main-section" style="display: none">
+                <nav>
+                    <div class="logo">X</div>
+                    <ul>
+                        <li><a href="#" id="home-link">Home</a></li>
+                        <li><a href="#" id="profile-link">Profile</a></li>
+                        <li><a href="#" id="logout-link">Logout</a></li>
+                    </ul>
+                </nav>
+
+                <div id="content">
+                    <!-- Timeline Section -->
+                    <div id="timeline" class="container">
+                        <h2>Timeline</h2>
+                        <div class="post-form">
+                            <textarea
+                                id="post-content"
+                                placeholder="What's happening?"
+                            ></textarea>
+                            <button id="post-button">Post</button>
+                        </div>
+                        <div id="posts-container"></div>
+                    </div>
+
+                    <!-- Profile Section -->
+                    <div id="profile" class="container" style="display: none">
+                        <h2>My Profile</h2>
+                        <div class="profile-info">
+                            <h3 id="profile-username"></h3>
+                            <p id="profile-email"></p>
+                        </div>
+                        <h3>My Posts</h3>
+                        <div id="profile-posts-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- JavaScript Files - Order matters for dependency loading -->
+        <script src="config.js"></script>
+        <script src="posts.js"></script>
+        <script src="profile.js"></script>
+        <script src="ui.js"></script>
+        <script src="replies.js"></script>
+        <script src="auth.js"></script>
+        <script src="app.js"></script>
+    </body>
+</html>
