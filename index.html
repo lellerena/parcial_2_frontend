@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <script
+        src="https://js.sentry-cdn.com/f938749932d99b9fd4880134a5847f39.min.js"
+        crossorigin="anonymous"></script>
+        <script>
+            Sentry.onLoad(function() {
+              Sentry.init({
+                  // You can add any additional configuration here
+                });
+            });
+        </script>
+        <script src="https://unpkg.com/@growthbook/growthbook/dist/bundles/index.min.js"></script>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>X - Formerly Twitter</title>
@@ -103,6 +114,8 @@
                                 placeholder="What's happening?"
                             ></textarea>
                             <button id="post-button">Post</button>
+                            <!-- Dynamic Formatting Control Will Appear Here -->
+                            <span id="formatting-control-container" style="margin-left: 8px;"></span>
                         </div>
                         <div id="posts-container"></div>
                     </div>
@@ -129,5 +142,52 @@
         <script src="replies.js"></script>
         <script src="auth.js"></script>
         <script src="app.js"></script>
+
+        <script>
+            const growthbookk = new growthbook.GrowthBook({
+                apiHost: "https://cdn.growthbook.io",
+                clientKey: "sdk-DVWPVEHjVLyqHeXd",
+                enableDevMode: true,
+                trackingCallback: (experiment, result) => {
+                    console.log("Viewed Experiment", {
+                        experimentId: experiment.key,
+                        variationId: result.key,
+                    });
+                }
+            });
+
+            growthbookk.loadFeatures().then(() => {
+                if (growthbookk.isOn("my-feature-flag")) {
+                    document.body.insertAdjacentHTML("beforeend", "<p>Feature is ON</p>");
+                }
+            });
+        </script>
+
+        <!-- Formatting Control Script -->
+        <script>
+            let useButton = growthbookk.isOn("botonvslink"); // Change to false to use a link instead
+
+            const formattingContainer = document.getElementById("formatting-control-container");
+
+            if (useButton) {
+                const btn = document.createElement("button");
+                btn.textContent = "Formatting";
+                btn.type = "button";
+                btn.style.marginLeft = "8px";
+                btn.onclick = () => {
+                    window.open("formatting.html", "_blank");
+                };
+                formattingContainer.appendChild(btn);
+            } else {
+                const link = document.createElement("a");
+                link.href = "formatting.html";
+                link.target = "_blank";
+                link.textContent = "Formatting";
+                link.style.marginLeft = "8px";
+                link.style.textDecoration = "underline";
+                link.style.color = "blue";
+                formattingContainer.appendChild(link);
+            }
+        </script>
     </body>
 </html>
