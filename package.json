@@ -1,0 +1,42 @@
+{
+  "name": "parcial_2_frontend",
+  "version": "1.0.0",
+  "description": "Un proyecto moderno que recrea las principales funcionalidades de X (anteriormente conocido como Twitter), permitiendo a los usuarios compartir pensamientos, interactuar con publicaciones y gestionar su perfil en una interfaz limpia e intuitiva.",
+  "main": "app.js",
+  "type": "module",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watchAll",
+    "test:coverage": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lellerena/parcial_2_frontend.git"
+  },
+  "keywords": [
+    "twitter",
+    "clone",
+    "frontend",
+    "javascript"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lellerena/parcial_2_frontend/issues"
+  },
+  "homepage": "https://github.com/lellerena/parcial_2_frontend#readme",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jsdom": "^26.1.0"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "moduleNameMapper": {
+      "\\.(css|less)$": "identity-obj-proxy"
+    },
+    "transform": {}
+  }
+}
