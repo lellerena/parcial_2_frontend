@@ -144,50 +144,61 @@
         <script src="app.js"></script>
 
         <script>
-            const growthbookk = new growthbook.GrowthBook({
-                apiHost: "https://cdn.growthbook.io",
-                clientKey: "sdk-DVWPVEHjVLyqHeXd",
-                enableDevMode: true,
-                trackingCallback: (experiment, result) => {
-                    console.log("Viewed Experiment", {
-                        experimentId: experiment.key,
-                        variationId: result.key,
-                    });
-                }
+    const growthbookk = new growthbook.GrowthBook({
+        apiHost: "https://cdn.growthbook.io",
+        clientKey: "sdk-DVWPVEHjVLyqHeXd",
+        enableDevMode: true,
+        trackingCallback: (experiment, result) => {
+            console.log("Viewed Experiment", {
+                experimentId: experiment.key,
+                variationId: result.key,
             });
+        }
+    });
 
-            growthbookk.loadFeatures().then(() => {
-                if (growthbookk.isOn("my-feature-flag")) {
-                    document.body.insertAdjacentHTML("beforeend", "<p>Feature is ON</p>");
-                }
-            });
-        </script>
+    function setupFormattingButton(useButton) {
+        const formattingContainer = document.getElementById("formatting-control-container");
 
-        <!-- Formatting Control Script -->
-        <script>
-            let useButton = growthbookk.isOn("botonvslink"); // Change to false to use a link instead
+        if (useButton) {
+            const btn = document.createElement("button");
+            btn.textContent = "Formatting";
+            btn.type = "button";
+            btn.style.marginLeft = "8px";
+            btn.onclick = () => {
+                window.open("formatting.html", "_blank");
+            };
+            formattingContainer.appendChild(btn);
+            console.log("using Button")
+        } else {
+            const link = document.createElement("a");
+            link.href = "formatting.html";
+            link.target = "_blank";
+            link.textContent = "Formatting";
+            link.style.marginLeft = "8px";
+            link.style.textDecoration = "underline";
+            link.style.color = "blue";
+            formattingContainer.appendChild(link);
+            console.log("using Link")
+        }
+    }
+    growthbookk.setAttributes({
+        id: "user-123", // must be a stable, unique identifier
+    });
 
-            const formattingContainer = document.getElementById("formatting-control-container");
+    growthbookk.loadFeatures().then(() => {
+        // Optional: show another flag
+        if (growthbookk.isOn("my-feature-flag")) {
+            document.body.insertAdjacentHTML("beforeend", "<p>Feature is ON</p>");
+        }
 
-            if (useButton) {
-                const btn = document.createElement("button");
-                btn.textContent = "Formatting";
-                btn.type = "button";
-                btn.style.marginLeft = "8px";
-                btn.onclick = () => {
-                    window.open("formatting.html", "_blank");
-                };
-                formattingContainer.appendChild(btn);
-            } else {
-                const link = document.createElement("a");
-                link.href = "formatting.html";
-                link.target = "_blank";
-                link.textContent = "Formatting";
-                link.style.marginLeft = "8px";
-                link.style.textDecoration = "underline";
-                link.style.color = "blue";
-                formattingContainer.appendChild(link);
-            }
-        </script>
+        // ✅ Run the boolean experiment
+        const useButton = growthbookk.isOn("botonvslink");//growthbookk.run({ key: "formattinglinkorbutton" });
+
+        // Proceed with rendering
+        setupFormattingButton(useButton);
+    });
+</script>
+
+
     </body>
 </html>
