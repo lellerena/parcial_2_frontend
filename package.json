@@ -8,6 +8,6 @@
   },
   "jest": {
     "testEnvironment": "jsdom",
-    "testMatch": ["**/tests/**/ui.test.js"]
+    "testMatch": ["**/tests/**/*.tests.js"]
   }
 }
