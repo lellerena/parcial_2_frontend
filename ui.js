@@ -1,10 +1,10 @@
-// DOM Elements - Navigation
-const homeLink = document.getElementById('home-link');
-const profileLink = document.getElementById('profile-link');
+// ui.js
 
-// Navigation Event Listeners
-homeLink.addEventListener('click', handleHomeClick);
-profileLink.addEventListener('click', handleProfileClick);
+// Declare DOM elements here, but don't assign yet
+let homeLink;
+let profileLink;
+let timeline = document.getElementById('timeline'); // Assuming timeline and profile exist on load
+let profile = document.getElementById('profile');
 
 // Extracted click handlers
 function handleHomeClick(e) {
@@ -29,6 +29,8 @@ function handleProfileClick(e) {
 
 // Add visual indication of current page
 function updateNavHighlight(currentPage) {
+    if (!homeLink || !profileLink) return;
+
     if (currentPage === 'home') {
         homeLink.classList.add('active-nav');
         profileLink.classList.remove('active-nav');
@@ -40,16 +42,24 @@ function updateNavHighlight(currentPage) {
     }
 }
 
-// Initialize the active state based on initial page load
+// Initialization function to find DOM elements and attach listeners
 function initNavigation() {
+    homeLink = document.getElementById('home-link');
+    profileLink = document.getElementById('profile-link');
+    timeline = document.getElementById('timeline');
+    profile = document.getElementById('profile');
+
+    if (homeLink) homeLink.addEventListener('click', handleHomeClick);
+    if (profileLink) profileLink.addEventListener('click', handleProfileClick);
+
     // Default to home page on initial load
     updateNavHighlight('home');
 }
 
-// Make functions available globally
+// Make functions available globally (if needed)
 window.updateNavHighlight = updateNavHighlight;
 
-// Export for testing
+// Export for testing and initialization
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         handleHomeClick,
