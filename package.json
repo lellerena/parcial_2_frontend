@@ -1,15 +1,9 @@
 {
-  "type": "module",
-  "scripts": {
-    "test": "jest"
-  },
   "devDependencies": {
-    "jest": "^29.7.0",
-    "jest-environment-jsdom": "^29.7.0"
+    "jest": "29.7.0",  // Fixed version (no ^)
+    "jest-environment-jsdom": "29.7.0"  // Exact match
   },
   "jest": {
-    "testEnvironment": "jest-environment-jsdom",
-    "transform": {},
-    "moduleFileExtensions": ["js", "json"]
+    "testEnvironment": "jsdom"
   }
 }
